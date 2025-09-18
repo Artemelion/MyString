@@ -5,22 +5,19 @@ using namespace std;
 MyString::MyString()
 {
 	length = 80;
-	str = new char[length] {};
+	str = new char[length+1] {};
 }
-
 MyString::MyString(int size)
 {
 	length = size;
 	str = new char[length] {};
 }
-
 MyString::MyString(const char* _str)
 {
 	length = strlen(_str);
 	str = new char[length + 1] {};
 	strcpy_s(str, length + 1, _str);
 }
-
 MyString::MyString(const MyString& obj)
 {
 	length = obj.length;
@@ -28,7 +25,6 @@ MyString::MyString(const MyString& obj)
 	str = new char[strlen(obj.str) + 1];
 	strcpy_s(str, strlen(obj.str) + 1, obj.str);
 }
-
 MyString::MyString(MyString&& obj)
 {
     str = obj.str;
@@ -37,7 +33,6 @@ MyString::MyString(MyString&& obj)
     obj.length = 0;
     cout << "Move constructor!!\n";
 }
-
 MyString::~MyString()
 {
 	delete[] str;
@@ -49,19 +44,6 @@ void MyString::Print()
 	cout << str << endl;
 }
 
-//void MyString::MyStrcpy(MyString& obj)
-//{
-//	if (this->length > obj.length)
-//	{
-//		delete[] str;
-//		for (int i = 0; i < length; i++)
-//		{
-//			obj.length[i] = length[i];
-//		}
-//		str = new char[strlen(obj.str) + 1];
-//		strcpy_s(str, strlen(obj.str) + 1, obj.str);
-//	}
-//}
 
 bool MyString::MyStrStr(const char* str)
 {
@@ -73,14 +55,6 @@ bool MyString::MyStrStr(const char* str)
 	}
 	return false;
 }
-
-int MyString::MyChr(char c)
-{
-
-	return 0;
-}
-
-
 void MyString::MyDelChr(char c)
 {
     int count = 0;
@@ -109,4 +83,101 @@ void MyString::MyDelChr(char c)
     delete[] str;
     str = newstr;
     length = newsize;
+}
+int MyString::MyStrLen()
+{
+    if (str == nullptr)
+    {
+        return 0;
+    }
+    int n = 0;
+    while (str[n] != '\0')
+    {
+        n++;
+    }
+    return n;
+}
+void MyString::MyStrcpy(MyString& obj)
+{
+    int srcSize = obj.MyStrLen();
+    char* fresh = new char[srcSize + 1] {};
+
+    for (int i = 0; i < srcSize; i++)
+    {
+        fresh[i] = obj.str[i];
+    }
+
+    delete[] str;
+    str = fresh;
+    length = srcSize;
+}
+int MyString::MyChr(char c)
+{
+    if (str == nullptr)
+    {
+        return -1;
+    }
+
+    int n = MyStrLen();
+    for (int i = 0; i < n; i++)
+    {
+        if (str[i] == c)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+void MyString::MyStrCat(MyString& b)
+{
+    int n1 = MyStrLen();
+    int n2 = b.MyStrLen();
+
+    char* merged = new char[n1 + n2 + 1] {};
+
+    for (int i = 0; i < n1; i++)
+    {
+        merged[i] = str[i];
+    }
+    for (int j = 0; j < n2; j++)
+    {
+        merged[n1 + j] = b.str[j];
+    }
+
+    delete[] str;
+    str = merged;
+    length = n1 + n2;
+}
+int MyString::MyStrCmp(MyString& b)
+{
+    int n1 = MyStrLen();
+    int n2 = b.MyStrLen();
+
+    int minLen = n1;
+    if (n2 < minLen)
+    {
+        minLen = n2;
+    }
+
+    for (int i = 0; i < minLen; i++)
+    {
+        if (str[i] < b.str[i])
+        {
+            return -1;
+        }
+        if (str[i] > b.str[i])
+        {
+            return 1;
+        }
+    }
+
+    if (n1 == n2)
+    {
+        return 0;
+    }
+    if (n1 < n2)
+    {
+        return -1;
+    }
+    return 1;
 }
