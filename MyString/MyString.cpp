@@ -41,6 +41,7 @@ MyString::~MyString()
 {
 	delete[] str;
 	length = 0;
+    count--;
 }
 
 int MyString::count = 0;
