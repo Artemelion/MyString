@@ -6,17 +6,20 @@ MyString::MyString()
 {
 	length = 80;
 	str = new char[length+1] {};
+    count++;
 }
 MyString::MyString(int size)
 {
 	length = size;
 	str = new char[length] {};
+    count++;
 }
 MyString::MyString(const char* _str)
 {
 	length = strlen(_str);
 	str = new char[length + 1] {};
 	strcpy_s(str, length + 1, _str);
+    count++;
 }
 MyString::MyString(const MyString& obj)
 {
@@ -24,6 +27,7 @@ MyString::MyString(const MyString& obj)
 
 	str = new char[strlen(obj.str) + 1];
 	strcpy_s(str, strlen(obj.str) + 1, obj.str);
+    count++;
 }
 MyString::MyString(MyString&& obj)
 {
@@ -37,6 +41,12 @@ MyString::~MyString()
 {
 	delete[] str;
 	length = 0;
+}
+
+int MyString::count = 0;
+void MyString::PrintCount()
+{
+    cout << "Count: " << count << endl;
 }
 
 void MyString::Print()

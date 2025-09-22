@@ -13,5 +13,7 @@ int main()
 	bool rez = obj1.MyStrStr("wo");
 	cout << rez << endl; 
 
+	MyString::PrintCount();
+
 	return 0;
 }
