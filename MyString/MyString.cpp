@@ -35,7 +35,6 @@ MyString::MyString(MyString&& obj)
     obj.str = nullptr;
     length = obj.length;
     obj.length = 0;
-    cout << "Move constructor!!\n";
 }
 MyString::~MyString()
 {
@@ -191,4 +190,100 @@ int MyString::MyStrCmp(MyString& b)
         return -1;
     }
     return 1;
+}
+
+MyString MyString::operator+(MyString& obj)
+{
+    int leftLength = MyStrLen();
+    int rightLength = obj.MyStrLen();
+
+    char* buffer = new char[leftLength + rightLength + 1] {};
+
+    for (int i = 0; i < leftLength; i++)
+    {
+        buffer[i] = str[i];
+    }
+    for (int j = 0; j < rightLength; j++)
+    {
+        buffer[leftLength + j] = obj.str[j];
+    }
+
+    MyString result(buffer);
+    delete[] buffer;
+    return result;
+}
+MyString MyString::operator+(const char* b)
+{
+    MyString rez(length + strlen(b)+1);
+    strcpy_s(rez.str, length+1, str);
+    strcat_s(rez.str, length + strlen(b) + 1, b);
+
+    return rez;
+}
+MyString MyString::operator-(char ch)
+{
+    int sourceLength = MyStrLen();
+
+    char* buffer = new char[sourceLength + 1] {};
+    int writeIndex = 0;
+
+    for (int i = 0; i < sourceLength; i++)
+    {
+        if (str[i] != ch)
+        {
+            buffer[writeIndex] = str[i];
+            writeIndex++;
+        }
+    }
+
+    MyString result(buffer);
+    delete[] buffer;
+    return result;
+}
+MyString MyString::operator-(const char* sub)
+{
+    if (sub == nullptr || *sub == '\0') 
+    {
+        return MyString(*this);
+    }
+
+    int sourceLength = MyStrLen();
+    int subLength = strlen(sub);
+
+    if (subLength > sourceLength) 
+    {
+        return MyString(*this);
+    }
+
+    char* buffer = new char[sourceLength + 1] {};
+    int bufferIndex = 0;
+
+    int i = 0;
+    while (i < sourceLength) 
+    {
+        bool found = true;
+        for (int j = 0; j < subLength; j++) {
+            if (i + j >= sourceLength || str[i + j] != sub[j]) {
+                found = false;
+                break;
+            }
+        }
+
+        if (found) 
+        {
+            i += subLength;
+        }
+        else 
+        {
+            buffer[bufferIndex] = str[i];
+            bufferIndex++;
+            i++;
+        }
+    }
+
+    buffer[bufferIndex] = '\0';
+
+    MyString result(buffer);
+    delete[] buffer;
+    return result;
 }

@@ -23,6 +23,11 @@ public:
 	void MyStrCat(MyString& b); // concatenation of str
 	int MyStrCmp(MyString& b); // compare str
 
+	MyString operator+(MyString& obj);
+	MyString operator+(const char* b);
+	MyString operator-(char ch);
+	MyString operator-(const char* sub);
+
 };
 
 

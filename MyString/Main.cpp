@@ -4,6 +4,7 @@ using namespace std;
 
 int main()
 {
+	/*
 	MyString obj1("Hello world!");
 	obj1.Print();
 
@@ -19,6 +20,26 @@ int main()
 
 	cout << "Total Objects: " << endl;
 	MyString::PrintCount();
+	*/
+
+	MyString a("Hello");
+	MyString b("World");
+
+	a.Print();
+	b.Print();
+	cout << endl;
+
+	MyString c = a.operator+(b); //Helloworld.
+	c.Print();
+
+	MyString c1 = a + "world"; //Helloworld
+	c1.Print();
+
+	MyString c2 = a.operator+(b) - 'l'; //heoword
+	c2.Print();
+
+	MyString d = a - "lo"; //hel
+	d.Print();
 
 	return 0;
 }
