@@ -28,6 +28,27 @@ public:
 	MyString operator-(char ch);
 	MyString operator-(const char* sub);
 
+	//перегрузка логических операций(через метод)
+
+	bool operator>(MyString& obj);
+	bool operator<(MyString& obj);
+	bool operator==(MyString& obj);
+	bool operator!=(MyString& obj);
+	bool operator>=(MyString& obj);
+	bool operator<=(MyString& obj);
+
+	MyString& operator++(); // ++a prefix
+	MyString& operator--(); // --a prefix
+
+	MyString& operator+= (const char* a);
+	MyString& operator+= (const MyString& obj);
+	MyString& operator-= (const char* a);
+
+
+
+
+
+
 };
 
 

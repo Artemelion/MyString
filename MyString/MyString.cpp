@@ -287,3 +287,117 @@ MyString MyString::operator-(const char* sub)
     delete[] buffer;
     return result;
 }
+
+MyString& MyString::operator++()
+{
+    char* newstr = new char[length + 2] {}; 
+    strcpy_s(newstr, length + 2, str);
+    delete[] str;
+    str = newstr;
+    length = length + 1;
+    return *this;
+}
+MyString& MyString::operator--()
+{
+    if (length == 0)
+    {
+        return *this;
+    }
+    char* newstr = new char[length -1] {}; 
+    for (int i = 0; i < length - 2; i++)
+    {
+        newstr[i] = str[i];
+    }
+    delete[] str;
+    str = newstr;
+    length = length - 1;
+    return *this;
+}
+
+MyString& MyString::operator+=(const char* a)
+{
+    int addLength = strlen(a);
+    char* newstr = new char[length + addLength + 1] {};
+    strcpy_s(newstr, length + 1, str);
+    strcat_s(newstr, length + addLength + 1, a);
+    delete[] str;
+    str = newstr;
+    length = length + addLength;
+    return *this;
+}
+MyString& MyString::operator+=(const MyString& obj)
+{
+	int addLength = obj.length;
+    char* newstr = new char[length + addLength + 1] {};
+    strcpy_s(newstr, length + 1, str);
+    strcat_s(newstr, length + addLength + 1, obj.str);
+    delete[] str;
+    str = newstr;
+    length = length + addLength;
+    return *this;
+}
+MyString& MyString::operator-=(const char* a)
+{
+    if (a == nullptr || *a == '\0') 
+    {
+        return *this;
+    }
+    int subLength = strlen(a);
+    if (subLength > length) 
+    {
+        return *this;
+    }
+    char* buffer = new char[length + 1] {};
+    int bufferIndex = 0;
+    int i = 0;
+    while (i < length) 
+    {
+        bool found = true;
+        for (int j = 0; j < subLength; j++) {
+            if (i + j >= length || str[i + j] != a[j]) {
+                found = false;
+                break;
+            }
+        }
+        if (found) 
+        {
+            i += subLength;
+        }
+        else 
+        {
+            buffer[bufferIndex] = str[i];
+            bufferIndex++;
+            i++;
+        }
+    }
+    buffer[bufferIndex] = '\0';
+    delete[] str;
+    str = buffer;
+    length = bufferIndex;
+    return *this;
+}
+
+bool MyString::operator>(MyString& obj)
+{
+    return MyStrCmp(obj) > 0;
+}
+bool MyString::operator<(MyString& obj)
+{
+    return MyStrCmp(obj) < 0;
+}
+bool MyString::operator==(MyString& obj)
+{
+    return MyStrCmp(obj) == 0;
+}
+bool MyString::operator!=(MyString& obj)
+{
+    return MyStrCmp(obj) != 0;
+}
+bool MyString::operator>=(MyString& obj)
+{
+    return MyStrCmp(obj) >= 0;
+}
+bool MyString::operator<=(MyString& obj)
+{
+    return MyStrCmp(obj) <= 0;
+}

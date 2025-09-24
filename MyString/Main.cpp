@@ -41,5 +41,20 @@ int main()
 	MyString d = a - "lo"; //hel
 	d.Print();
 
+	++a; // Hello+1space
+	a.Print();
+	MyString f = --a; // Hell
+	f.Print();
+	a += "world"; //Helloworld
+	a.Print();
+	a += b; //Helloworld
+	a.Print();
+	a -= "lo"; //Hel
+	a.Print();
+	cout << (a == b); // true or false
+	cout << (a > b); // true or false
+
 	return 0;
 }
+
+
