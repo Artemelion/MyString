@@ -44,8 +44,8 @@ public:
 	MyString& operator+= (const MyString& obj);
 	MyString& operator-= (const char* a);
 
-
-
+	MyString& operator= (const MyString& obj); // copy assignment
+	MyString& operator= (MyString&& obj); // move assignment
 
 
 

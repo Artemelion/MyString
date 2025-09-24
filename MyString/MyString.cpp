@@ -401,3 +401,36 @@ bool MyString::operator<=(MyString& obj)
 {
     return MyStrCmp(obj) <= 0;
 }
+
+
+MyString& MyString::operator=(const MyString& obj)
+{
+    if (this == &obj) 
+    {
+        return *this;
+    }
+    
+    if (str != nullptr)
+    {
+		delete[] str;
+    }
+    length = obj.length;
+    str = new char[length + 1];
+    strcpy_s(str, length + 1, obj.str);
+    return *this;
+}
+
+MyString& MyString::operator=(MyString&& obj)
+{
+    if (str != nullptr)
+    {
+        delete[] str;
+    }
+	str = obj.str;
+	obj.str = nullptr;
+	length = obj.length;
+	obj.length = 0;
+	return *this;
+
+}
+
