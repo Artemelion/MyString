@@ -1,4 +1,7 @@
 #pragma once
+#include <iostream>
+using namespace std;
+
 class MyString
 {
 	char* str; 
@@ -50,8 +53,8 @@ public:
 	MyString& operator= (const MyString& obj); // copy assignment
 	MyString& operator= (MyString&& obj); // move assignment
 
-
-
+	friend ostream& operator<<(ostream& os, const MyString& obj);
+	friend istream& operator>>(istream& is, const MyString& obj);
 };
 
 

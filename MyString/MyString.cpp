@@ -445,3 +445,17 @@ MyString& MyString::operator=(MyString&& obj)
 
 }
 
+
+
+ostream& operator<<(ostream& os, const MyString& obj)
+{
+    os << obj.str;
+	return os;
+}
+
+istream& operator>>(istream& is, const MyString& obj)
+{
+    is >> obj.str;
+	return is;
+}
+
