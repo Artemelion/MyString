@@ -22,6 +22,7 @@ int main()
 	MyString::PrintCount();
 	*/
 
+/*
 	MyString a("Hello");
 	MyString b("World");
 
@@ -53,6 +54,25 @@ int main()
 	a.Print();
 	cout << (a == b); // true or false
 	cout << (a > b); // true or false
+
+*/
+
+	MyString obj("Hello World");
+	obj.Print();
+
+	for (int i = 0; i < obj.GetLength(); i++)
+	{
+		cout << obj[i] << " ";
+	}
+	cout << endl;
+
+
+	string str = "Hello world";
+	for (int i = 0; i < str.length(); i++)
+	{
+		cout << str[i] << " ";
+	}
+	cout << endl;
 
 	return 0;
 }

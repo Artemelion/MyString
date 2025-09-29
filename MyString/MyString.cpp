@@ -192,6 +192,17 @@ int MyString::MyStrCmp(MyString& b)
     return 1;
 }
 
+int MyString::GetLength() { return length; }
+
+char MyString::operator[](int index)
+{
+    if (index >= 0 || index < length)
+    {
+        return str[index];
+    }
+    throw exception("index error");
+}
+
 MyString MyString::operator+(MyString& obj)
 {
     int leftLength = MyStrLen();
