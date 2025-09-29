@@ -26,7 +26,7 @@ public:
 	void MyStrCat(MyString& b); // concatenation of str
 	int MyStrCmp(MyString& b); // compare str
 
-	int GetLength();
+	int GetLength() const;
 	char operator[](int index);
 
 	MyString operator+(MyString& obj);

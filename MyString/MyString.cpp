@@ -192,7 +192,7 @@ int MyString::MyStrCmp(MyString& b)
     return 1;
 }
 
-int MyString::GetLength() { return length; }
+int MyString::GetLength() const { return length; }
 
 char MyString::operator[](int index)
 {
