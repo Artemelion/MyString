@@ -27,6 +27,21 @@ public:
 	int MyStrCmp(MyString& b); // compare str
 
 	int GetLength() const;
+
+	MyString(initializer_list<char> list) 
+	{
+		length = list.size();
+		str = new char[length + 1];
+		for (auto x = list.begin(); x != list.end(); x++)
+		{
+			*str++ = *x;
+			str++;
+		}
+		str -= length;
+	}
+
+
+
 	char operator[](int index);
 
 	MyString operator+(MyString& obj);
